@@ -5,29 +5,67 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF"
     tools:context=".MainActivity">
+
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="300dp"
         android:src="@drawable/currency"
-        android:background="@color/black"/>
+        android:scaleType="centerCrop"
+        android:background="@color/black" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="86dp"
         android:id="@+id/edittxt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:hint="Enter Currency"
-        android:layout_marginLeft="50dp"
-        android:layout_margin="10dp"/>
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:id="@+id/btn"
-        android:text="Convert"
-        android:backgroundTint="#871B1B"/>
+        android:inputType="numberDecimal"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:background="@android:drawable/edit_text"
+        android:textSize="16sp" />
 
+    <!-- Horizontal Layout for Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="Convert"
+            android:textSize="16sp"
+            android:backgroundTint="@color/black"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/resetBtn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="Reset"
+            android:backgroundTint="@color/black"
+            android:textSize="16sp"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/outputText"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="After Converting Amount"
+        android:textColor="#000000"
+        android:textSize="18sp" />
 
 </LinearLayout>
