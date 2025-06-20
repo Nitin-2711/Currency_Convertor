@@ -1,6 +1,7 @@
 package com.example.currency_convertor;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,51 +36,50 @@ public class MainActivity extends AppCompatActivity {
         outputText = findViewById(R.id.outputText);
 
         // Convert button logic
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String input = editText.getText().toString().trim();
-                if (input.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Please enter an amount!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+        btn.setOnClickListener(v -> {
+            String input = editText.getText().toString().trim();
+            if (input.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Please enter an amount!", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-                try {
-                    float amount = Float.parseFloat(input);
-                    fetchExchangeRate(amount);
-                } catch (NumberFormatException e) {
-                    Toast.makeText(MainActivity.this, "Invalid number format!", Toast.LENGTH_SHORT).show();
-                }
+            try {
+                float amount = Float.parseFloat(input);
+                fetchExchangeRate(amount);
+            } catch (NumberFormatException e) {
+                Toast.makeText(MainActivity.this, "Invalid number format!", Toast.LENGTH_SHORT).show();
             }
         });
 
         // Reset button logic
-        resetBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editText.setText("");
-                outputText.setText("After Converting Amount");
-            }
+        resetBtn.setOnClickListener(v -> {
+            editText.setText("");
+            outputText.setText("After Converting Amount");
         });
     }
 
     private void fetchExchangeRate(float dollarAmount) {
-        String apiKey = "061f11a63427e4a8cea79e19 "; // Replace with your real API key
+        String apiKey = "061f11a63427e4a8cea79e198f012345"; // Replace with your REAL 32-character API key (no spaces)
         String url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/USD";
 
         RequestQueue queue = Volley.newRequestQueue(this);
+
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
+                        Log.d("API_RESPONSE", response.toString());
                         JSONObject rates = response.getJSONObject("conversion_rates");
                         double inrRate = rates.getDouble("INR");
                         double converted = dollarAmount * inrRate;
-                        outputText.setText("Converted: " + String.format("%.2f INR", converted));
+                        outputText.setText("Converted: ₹" + String.format("%.2f", converted));
                     } catch (JSONException e) {
                         Toast.makeText(MainActivity.this, "Parsing error!", Toast.LENGTH_SHORT).show();
                     }
                 },
-                error -> Toast.makeText(MainActivity.this, "API Error: " + error.getMessage(), Toast.LENGTH_SHORT).show()
+                error -> {
+                    Log.e("API_ERROR", error.toString());
+                    Toast.makeText(MainActivity.this, "API Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
         );
 
         queue.add(request);

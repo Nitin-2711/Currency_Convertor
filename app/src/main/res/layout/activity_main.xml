@@ -1,71 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#FFFFFF"
-    tools:context=".MainActivity">
+    android:padding="24dp"
+    android:background="@android:color/white">
 
+    <!-- Top Image -->
     <ImageView
+        android:id="@+id/currencyImage"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:src="@drawable/currency"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:background="@color/black" />
+        android:layout_alignParentTop="true"
+        android:src="@drawable/currency" />
 
-    <EditText
-        android:id="@+id/edittxt"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:hint="Enter Currency"
-        android:inputType="numberDecimal"
-        android:layout_marginTop="16dp"
-        android:padding="12dp"
-        android:background="@android:drawable/edit_text"
-        android:textSize="16sp" />
-
-    <!-- Horizontal Layout for Buttons -->
-    <LinearLayout
+    <!-- Input Field -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_below="@id/currencyImage"
+        android:layout_marginTop="16dp"
+        android:hint="Enter amount in USD"
+        app:boxBackgroundMode="outline">
 
-        <Button
-            android:id="@+id/btn"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="Convert"
-            android:textSize="16sp"
-            android:backgroundTint="@color/black"
-            android:layout_marginEnd="8dp" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edittxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/resetBtn"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="Reset"
-            android:backgroundTint="@color/black"
-            android:textSize="16sp"
-            android:layout_marginStart="8dp" />
-    </LinearLayout>
+    <!-- Convert Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Convert to INR"
+        android:layout_below="@id/textInputLayout"
+        android:layout_marginTop="16dp"
+        app:cornerRadius="12dp"
+        app:iconPadding="0dp"
+        android:textColor="@android:color/white" />
 
-    <TextView
+    <!-- Reset Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/resetBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:textColor="@color/white"
+        android:layout_below="@id/btn"
+        android:layout_marginTop="8dp"
+        app:cornerRadius="12dp" />
+
+    <!-- Output Text -->
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/outputText"
         android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:text="After Converting Amount"
-        android:textColor="#000000"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_below="@id/resetBtn"
+        android:layout_marginTop="24dp" />
 
-</LinearLayout>
+</RelativeLayout>
