@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchExchangeRate(float dollarAmount) {
-        String apiKey = "061f11a63427e4a8cea79e19"; // Replace with your real API key
+        String apiKey = "061f11a63427e4a8cea79e19 "; // Replace with your real API key
         String url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/USD";
 
         RequestQueue queue = Volley.newRequestQueue(this);
